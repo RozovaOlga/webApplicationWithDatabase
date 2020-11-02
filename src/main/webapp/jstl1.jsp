@@ -1,4 +1,6 @@
 <%@ page import="by.grodno.home.webappsample.service.Department" %>
+<%@ page import="by.grodno.home.webappsample.service.User" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -34,7 +36,7 @@
             <th scope="col">Birthdate</th>
             <th scope="col">Sex</th>
             <th scope="col">Salary</th>
-            <th scope="col">Location</th>
+            <th scope="col">NameDepartment</th>
             <th scope="col">Actions</th>
 
         </tr>
@@ -51,21 +53,21 @@
                     <c:otherwise>Female</c:otherwise>
                 </c:choose></td>
                 <td>${user.salary}</td>
-                <td>
-                <c:if test="${requestScope.user.departments != null&&!requestScope.user.departments.isEmpty()}">
-                    <c:forEach var="department" items="${requestScope.user.departments}">
-
-                            <c:out value="${department.location}"/>
-
-                    </c:forEach>
-                </c:if>
-                </td>
+                <td><c:choose>
+                    <c:when test="${user.departments!=null&&!user.departments.isEmpty()}">
+                        <c:forEach var="department" items="${user.departments}">
+                            ${department.name}
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise> </c:otherwise>
+                </c:choose></td>
                 <td><a class="btn btn-warning"
-                       href="user/delete?number=${user.id}">Delete
+                       href="update?number=${user.id}">Edit
                     user</a>
                     <a class="btn btn-warning"
-                       href="update?number=${user.id}">Update
+                       href="user/delete?number=${user.id}">Delete
                         user</a>
+
                 </td>
             </tr>
 

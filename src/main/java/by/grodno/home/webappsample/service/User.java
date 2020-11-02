@@ -14,6 +14,9 @@ public class User {
     private Double salary;
     private List<Department> departments;
 
+    public User() {
+    }
+
     public User(Integer id, String firstName, String lastName, Integer department, Date birthdate, boolean male, Double salary, List<Department> departments) {
         this.id = id;
         this.firstName = firstName;

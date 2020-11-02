@@ -37,6 +37,9 @@ public class UserService {
             while (rs.next()) {
                 User user = mapRawToUser(rs);
                 result.add(user);
+                if (user.getDepartment() != null && user.getDepartment().toString().length() > 0) {
+                    user.setDepartments(rr(rs));
+                }
             }
             rs.close();
         } catch (Exception e) {
@@ -45,8 +48,17 @@ public class UserService {
         return result;
     }
 
+    public List<Department> rr(ResultSet rs) throws SQLException {
+        List <Department>   departmentList= new ArrayList<Department>();
+        Department department = new Department();
+        department.setId(rs.getInt(8));
+        department.setName(rs.getString(9));
+        department.setLocation(rs.getString(10));
+        departmentList.add(department);
+        return departmentList;
+    }
+
     public User mapRawToUser(ResultSet rs) throws SQLException {
-        List<Department> departmentList = new ArrayList<Department>();
         Integer id = rs.getInt(1);
         String fName = rs.getString(2);
         String lName = rs.getString(3);
@@ -54,15 +66,7 @@ public class UserService {
         Date date = rs.getTimestamp(5);
         Boolean male = rs.getBoolean(6);
         Integer dept = rs.getInt(7) == 0 ? null : rs.getInt(7);
-        if (dept != null && dept.toString().length() > 0) {
-            Department department = new Department();
-            department.setId(rs.getInt(8));
-            department.setName(rs.getString(9));
-            department.setLocation(rs.getString(10));
-            departmentList.add(department);
-        }
-        User user = new User(id, fName, lName, dept, date, male, sal, departmentList);
-
+        User user = new User(id, fName, lName, dept, date, male, sal);
         return user;
     }
 
