@@ -1,7 +1,6 @@
 package by.grodno.home.webappsample.service;
 
 import java.util.Date;
-import java.util.List;
 
 public class User {
 
@@ -12,21 +11,11 @@ public class User {
     private Date birthdate;
     private boolean male;
     private Double salary;
-    private List<Department> departments;
+    private Department departmentGetFromDatabase;
 
     public User() {
     }
 
-    public User(Integer id, String firstName, String lastName, Integer department, Date birthdate, boolean male, Double salary, List<Department> departments) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.department = department;
-        this.birthdate = birthdate;
-        this.male = male;
-        this.salary = salary;
-        this.departments = departments;
-    }
 
     public User(Integer id, String firstName, String lastName, Integer department, Date birthdate, boolean male, Double salary) {
         this.id = id;
@@ -46,22 +35,6 @@ public class User {
         this.birthdate = birthdate;
         this.male = male;
 
-    }
-
-    public User(Integer id, String firstName, String lastName, Date birthdate, boolean male) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthdate = birthdate;
-        this.male = male;
-    }
-
-    public List<Department> getDepartments() {
-        return departments;
-    }
-
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
     }
 
     public Integer getId() {
@@ -118,5 +91,13 @@ public class User {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public Department getDepartmentGetFromDatabase() {
+        return departmentGetFromDatabase;
+    }
+
+    public void setDepartmentGetFromDatabase(Department departmentGetFromDatabase) {
+        this.departmentGetFromDatabase = departmentGetFromDatabase;
     }
 }

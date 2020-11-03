@@ -53,14 +53,7 @@
                     <c:otherwise>Female</c:otherwise>
                 </c:choose></td>
                 <td>${user.salary}</td>
-                <td><c:choose>
-                    <c:when test="${user.departments!=null&&!user.departments.isEmpty()}">
-                        <c:forEach var="department" items="${user.departments}">
-                            ${department.name}
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise> </c:otherwise>
-                </c:choose></td>
+                <td>${user.departmentGetFromDatabase.name}</td>
                 <td><a class="btn btn-warning"
                        href="update?number=${user.id}">Edit
                     user</a>

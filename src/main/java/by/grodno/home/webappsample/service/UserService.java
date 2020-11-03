@@ -14,7 +14,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 
-public class UserService {
+public class UserService  {
 
     private static UserService userService;
 
@@ -36,10 +36,10 @@ public class UserService {
             ResultSet rs = stmt.executeQuery(SQL.SELECT_ALL);
             while (rs.next()) {
                 User user = mapRawToUser(rs);
-                result.add(user);
                 if (user.getDepartment() != null && user.getDepartment().toString().length() > 0) {
-                    user.setDepartments(rr(rs));
+                    user.setDepartmentGetFromDatabase(createDepartmentGetFromDatabase(rs));
                 }
+                result.add(user);
             }
             rs.close();
         } catch (Exception e) {
@@ -48,14 +48,12 @@ public class UserService {
         return result;
     }
 
-    public List<Department> rr(ResultSet rs) throws SQLException {
-        List <Department>   departmentList= new ArrayList<Department>();
+    public Department createDepartmentGetFromDatabase(ResultSet rs) throws SQLException {
         Department department = new Department();
         department.setId(rs.getInt(8));
         department.setName(rs.getString(9));
         department.setLocation(rs.getString(10));
-        departmentList.add(department);
-        return departmentList;
+        return department;
     }
 
     public User mapRawToUser(ResultSet rs) throws SQLException {
